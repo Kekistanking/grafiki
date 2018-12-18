@@ -15,8 +15,11 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.buildgraph = QtWidgets.QPushButton(self.centralwidget)
-        self.buildgraph.setGeometry(QtCore.QRect(330, 240, 261, 101))
+        self.buildgraph.setGeometry(QtCore.QRect(340, 190, 261, 101))
         self.buildgraph.setObjectName("buildgraph")
+        self.bexit = QtWidgets.QPushButton(self.centralwidget)
+        self.bexit.setGeometry(QtCore.QRect(340, 320, 261, 101))
+        self.bexit.setObjectName("exit")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 936, 21))
@@ -31,6 +34,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.buildgraph.setText(_translate("MainWindow", "Построить график"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Главное меню"))
+        self.buildgraph.setText(_translate("MainWindow", "Построить график на плоскости"))
+        self.bexit.setText(_translate("MainWindow", "Выйти"))
 
