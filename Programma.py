@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QInputDialog
 from MyWindow import Ui_MainWindow
 from MyGraph import Ui_Graphs
 
-
+# блок взаимосвязанных функций по обработке тригонометрических функций
 def sin_result(x, list):
     return list[0] * math.sin(list[1] * x) + list[2]
 
@@ -414,50 +414,53 @@ class SecondWindow(QMainWindow, Ui_Graphs):
             pass
 
     def run_mainfunc(self):
-        # область определения
-        lower_bound, upper_bound = self.get_bounds()
-        if lower_bound is None:
-            return None
-        results = []
-        for i in range(10 * lower_bound, 10 * upper_bound):
-            res = 0
-            result_funk_list = [0 for i in range(len(self.funk_list))]
+        try:
+            # область определения
+            lower_bound, upper_bound = self.get_bounds()
+            if lower_bound is None:
+                return None
+            results = []
+            for x in range(10 * lower_bound, 10 * upper_bound):
+                res = 0
+                result_funk_list = [0 for counter in range(len(self.funk_list))]
 
-            result_znak_list = [i for i in self.znak_list]
-            # все состовляющие result_funk_list заменяются на значения при x=i/10
-            for k in range(len(self.funk_list)):
+                result_znak_list = [element for element in self.znak_list]
+                # все состовляющие result_funk_list заменяются на значения при x=i/10
+                for counter in range(len(self.funk_list)):
 
-                result_funk_list[k] = check_funk(i / 10, self.funk_list[k])
+                    result_funk_list[counter] = check_funk(x / 10, self.funk_list[counter])
 
-            counter = 0  # счеткик операций
-            result_funk_list = [0] + result_funk_list
-            # далее идет выполнение арифметических операций в нужной последовательности
-            # сначала все выражения вида a*b и a/b заменяются на свои значения
-            while counter < (len(result_znak_list)):
+                counter = 0  # счеткик операций
+                result_funk_list = [0] + result_funk_list
+                # далее идет выполнение арифметических операций в нужной последовательности
+                # сначала все выражения вида a*b и a/b заменяются на свои значения
+                while counter < (len(result_znak_list)):
 
-                if result_znak_list[counter] == '*' or result_znak_list[counter] == '/':
+                    if result_znak_list[counter] == '*' or result_znak_list[counter] == '/':
 
-                    result_funk_list[counter + 1] = run_znak(result_znak_list[counter],
-                                                             result_funk_list[counter],
-                                                             result_funk_list[counter + 1])
-                    del result_funk_list[counter]
-                    del result_znak_list[counter]
-                    print(result_funk_list, result_znak_list)
-                else:
-                    counter += 1
-            # теперь остались только порядок чисел с операциями +,-, которые мы
-            # просто выполняем по порядку
-            for u in range(len(result_znak_list)):
-                result_funk_list[0] = run_znak(result_znak_list[u], result_funk_list[0],
-                                               result_funk_list[1])
-                del result_funk_list[1]
-            res = result_funk_list[0]
-            results.append(res)
+                        result_funk_list[counter + 1] = run_znak(result_znak_list[counter],
+                                                                 result_funk_list[counter],
+                                                                 result_funk_list[counter + 1])
+                        del result_funk_list[counter]
+                        del result_znak_list[counter]
+                        print(result_funk_list, result_znak_list)
+                    else:
+                        counter += 1
+                # теперь остались только порядок чисел с операциями +,-, которые мы
+                # просто выполняем по порядку
+                for u in range(len(result_znak_list)):
+                    result_funk_list[0] = run_znak(result_znak_list[u], result_funk_list[0],
+                                                   result_funk_list[1])
+                    del result_funk_list[1]
+                res = result_funk_list[0]
+                results.append(res)
 
-        self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound)],
-                               results,
-                               pen="w")
-        self.graphicsView.setAspectLocked(lock=True, ratio=1)
+            self.graphicsView.plot([x / 10 for x in range(10 * lower_bound, 10 * upper_bound)],
+                                   results,
+                                   pen="w")
+            self.graphicsView.setAspectLocked(lock=True, ratio=1)
+        except Exception:
+            pass
 
     def run_cal_cos(self):
         if self.is_znak_chenged:
