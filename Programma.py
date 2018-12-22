@@ -1,4 +1,4 @@
-import sys
+﻿import sys
 import math
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMainWindow
@@ -7,6 +7,8 @@ from MyWindow import Ui_MainWindow
 from MyGraph import Ui_Graphs
 
 # блок взаимосвязанных функций по обработке тригонометрических функций
+
+
 def sin_result(x, list):
     return list[0] * math.sin(list[1] * x) + list[2]
 
@@ -180,7 +182,7 @@ class SecondWindow(QMainWindow, Ui_Graphs):
             return None
         # построение графика
         self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound)],
-                               [a * math.sin(c * (i / 10)) + b
+                               [a * math.sin(b * (i / 10)) + c
                                 for i in range(10 * lower_bound, 10 * upper_bound)],
                                pen="w")
         # масштабирование графика 1:1
@@ -196,7 +198,7 @@ class SecondWindow(QMainWindow, Ui_Graphs):
             return None
         # построение графика
         self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound)],
-                               [a * self.mytan(c * (i / 10)) + b
+                               [a * mytan(b * (i / 10)) + c
                                 for i in range(10 * lower_bound, 10 * upper_bound)],
                                pen="y")
         # масштабирование графика 1:1
@@ -212,7 +214,7 @@ class SecondWindow(QMainWindow, Ui_Graphs):
             return None
         # построение графика
         self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound)],
-                               [a * math.cos(c * (i / 10)) + b
+                               [a * math.cos(b * (i / 10)) + c
                                 for i in range(10 * lower_bound, 10 * upper_bound)],
                                pen="m")
         # масштабирование графика 1:1
@@ -220,7 +222,9 @@ class SecondWindow(QMainWindow, Ui_Graphs):
 
     def run_p(self):  # построение графика многочлена
         number, okBtnPressed = QInputDialog.getInt(self, "Ввод степени многочлчена", "Введите "
-                                                         "степень многочлена", 0, 0, 5, 1)
+                                                         "степень многочлена", -1, 0, 5, 1)
+        if number == -1:
+            return None
         coefficients = self.get_coefficients(number + 1)
         if coefficients is None:  # при закрытии окна с получением коэффициентов, график не строится
             return None
@@ -443,7 +447,6 @@ class SecondWindow(QMainWindow, Ui_Graphs):
                                                                  result_funk_list[counter + 1])
                         del result_funk_list[counter]
                         del result_znak_list[counter]
-                        print(result_funk_list, result_znak_list)
                     else:
                         counter += 1
                 # теперь остались только порядок чисел с операциями +,-, которые мы
@@ -457,7 +460,7 @@ class SecondWindow(QMainWindow, Ui_Graphs):
 
             self.graphicsView.plot([x / 10 for x in range(10 * lower_bound, 10 * upper_bound)],
                                    results,
-                                   pen="w")
+                                   pen="r")
             self.graphicsView.setAspectLocked(lock=True, ratio=1)
         except Exception:
             pass
@@ -518,7 +521,9 @@ class SecondWindow(QMainWindow, Ui_Graphs):
         if self.is_znak_chenged:
             # прием коэффициентов
             number, okBtnPressed = QInputDialog.getInt(self, "Ввод степени многочлчена",
-                                                       "Введите степень многочлена", 0, 0, 5, 1)
+                                                       "Введите степень многочлена", -1, 0, 5, 1)
+            if number == -1:
+                return None
             coefficients = self.get_coefficients(number + 1)
             if coefficients is None:
                 return None
