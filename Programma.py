@@ -18,7 +18,7 @@ def cos_result(x, list):
 
 
 def tg_result(x, list):
-    return list[0] * math.tan(list[1] * x) + list[2]
+    return list[0] * mytan(list[1] * x) + list[2]
 
 
 def p_result(x, list):
@@ -181,9 +181,9 @@ class SecondWindow(QMainWindow, Ui_Graphs):
         if lower_bound is None:  # при закрытии окна с получением границ, график не строится
             return None
         # построение графика
-        self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound)],
+        self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                [a * math.sin(b * (i / 10)) + c
-                                for i in range(10 * lower_bound, 10 * upper_bound)],
+                                for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                pen="w")
         # масштабирование графика 1:1
         self.graphicsView.setAspectLocked(lock=True, ratio=1)
@@ -197,9 +197,9 @@ class SecondWindow(QMainWindow, Ui_Graphs):
         if lower_bound is None:  # при закрытии окна с получением границ, график не строится
             return None
         # построение графика
-        self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound)],
+        self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                [a * mytan(b * (i / 10)) + c
-                                for i in range(10 * lower_bound, 10 * upper_bound)],
+                                for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                pen="y")
         # масштабирование графика 1:1
         self.graphicsView.setAspectLocked(lock=True, ratio=1)
@@ -213,9 +213,9 @@ class SecondWindow(QMainWindow, Ui_Graphs):
         if lower_bound is None:  # при закрытии окна с получением границ, график не строится
             return None
         # построение графика
-        self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound)],
+        self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                [a * math.cos(b * (i / 10)) + c
-                                for i in range(10 * lower_bound, 10 * upper_bound)],
+                                for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                pen="m")
         # масштабирование графика 1:1
         self.graphicsView.setAspectLocked(lock=True, ratio=1)
@@ -229,7 +229,7 @@ class SecondWindow(QMainWindow, Ui_Graphs):
         if coefficients is None:  # при закрытии окна с получением коэффициентов, график не строится
             return None
         lower_bound, upper_bound = self.get_bounds()
-        if lower_bound is None:  # при закрытии окна с получением границ, график не строится
+        if lower_bound is None:  # при закрытии окна с получением границ, график не строится2
             return None
         if number == 5:  # построение графика 5ой степени
             a = coefficients[0]
@@ -238,10 +238,10 @@ class SecondWindow(QMainWindow, Ui_Graphs):
             d = coefficients[3]
             e = coefficients[4]
             f = coefficients[5]
-            self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound)],
+            self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                    [a * (i / 10) ** 5 + b * (i / 10) ** 4 + c * (
                                        i / 10) ** 3 + d * (i / 10) ** 2 + e * (i / 10) + f
-                                    for i in range(10 * lower_bound, 10 * upper_bound)],
+                                    for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                    pen="r")
             self.graphicsView.setAspectLocked(lock=True, ratio=1)
 
@@ -251,10 +251,10 @@ class SecondWindow(QMainWindow, Ui_Graphs):
             c = coefficients[2]
             d = coefficients[3]
             e = coefficients[4]
-            self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound)],
+            self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                    [a * (i / 10) ** 4 + b * (i / 10) ** 3 + c * (
                                        i / 10) ** 2 + d * (i / 10) ** 1 + e
-                                    for i in range(10 * lower_bound, 10 * upper_bound)],
+                                    for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                    pen="c")
             self.graphicsView.setAspectLocked(lock=True, ratio=1)
 
@@ -263,10 +263,10 @@ class SecondWindow(QMainWindow, Ui_Graphs):
             b = coefficients[1]
             c = coefficients[2]
             d = coefficients[3]
-            self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound)],
+            self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                    [a * (i / 10) ** 3 + b * (i / 10) ** 2 + c * (
                                        i / 10) ** 1 + d
-                                    for i in range(10 * lower_bound, 10 * upper_bound)],
+                                    for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                    pen="g")
             self.graphicsView.setAspectLocked(lock=True, ratio=1)
 
@@ -274,24 +274,24 @@ class SecondWindow(QMainWindow, Ui_Graphs):
             a = coefficients[0]
             b = coefficients[1]
             c = coefficients[2]
-            self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound)],
+            self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                    [a * (i / 10) ** 2 + b * (i / 10) ** 1 + c
-                                    for i in range(10 * lower_bound, 10 * upper_bound)],
+                                    for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                    pen="b")
             self.graphicsView.setAspectLocked(lock=True, ratio=1)
 
         elif number == 1:  # построение графика 1ой степени
             a = coefficients[0]
             b = coefficients[1]
-            self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound)],
+            self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                    [a * (i / 10) ** 1 + b
-                                    for i in range(10 * lower_bound, 10 * upper_bound)],
+                                    for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                    pen="r")
             self.graphicsView.setAspectLocked(lock=True, ratio=1)
 
         elif number == 0:  # построение графика 5ой степени
             a = coefficients[0]
-            self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound)],
+            self.graphicsView.plot([i / 10 for i in range(10 * lower_bound, 10 * upper_bound + 1)],
                                    [a], pen="r")
             self.graphicsView.setAspectLocked(lock=True, ratio=1)
 
@@ -424,7 +424,7 @@ class SecondWindow(QMainWindow, Ui_Graphs):
             if lower_bound is None:
                 return None
             results = []
-            for x in range(10 * lower_bound, 10 * upper_bound):
+            for x in range(10 * lower_bound, 10 * upper_bound + 1):
                 res = 0
                 result_funk_list = [0 for counter in range(len(self.funk_list))]
 
@@ -458,7 +458,7 @@ class SecondWindow(QMainWindow, Ui_Graphs):
                 res = result_funk_list[0]
                 results.append(res)
 
-            self.graphicsView.plot([x / 10 for x in range(10 * lower_bound, 10 * upper_bound)],
+            self.graphicsView.plot([x / 10 for x in range(10 * lower_bound, 10 * upper_bound + 1)],
                                    results,
                                    pen="r")
             self.graphicsView.setAspectLocked(lock=True, ratio=1)
@@ -531,14 +531,14 @@ class SecondWindow(QMainWindow, Ui_Graphs):
             # добавление заданной функции и знака в вычисления и историю
             self.funk_list.append(('p', list))
             self.znak_list.append(self.cal_znak)
-            self.cal_dop_funk.setText(self.cal_dop_funk.text()+' + '.join(
+            self.cal_dop_funk.setText(self.cal_dop_funk.text() + ' + '.join(
                 [str(coefficients[i]) + '*x^' + str(number - i) for i in range(number + 1)]))
             if len(self.history_funk) > 1:
                 self.history_funk.append(self.history_funk[-1] + self.cal_znak + ' + '.join(
-                 [str(coefficients[i]) + '*x^' + str(number - i) for i in range(number + 1)]))
+                    [str(coefficients[i]) + '*x^' + str(number - i) for i in range(number + 1)]))
             else:
                 self.history_funk.append(self.history_funk[-1] + ' + '.join(
-                 [str(coefficients[i]) + '*x^' + str(number - i) for i in range(number + 1)]))
+                    [str(coefficients[i]) + '*x^' + str(number - i) for i in range(number + 1)]))
             self.is_znak_chenged = False
 
         else:
